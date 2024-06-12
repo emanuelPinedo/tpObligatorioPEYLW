@@ -1,5 +1,3 @@
-
-
 function validar(){
     var nombre = document.getElementById('nombre').value;
     var apellido = document.getElementById('apellido').value;
@@ -48,29 +46,31 @@ function validar(){
         despintarCampoError('obras_sociales');
     }
 
-    // Validación de fecha de nacimiento
-    if(!validarFecha(dia, mes, anio)){
-        if(dia == ''){
-            pintarCampoError('dia');
-            validarCampos = false;
-        } else {
-            despintarCampoError('dia');
-        }
-
-        if(mes <1 || mes >12 || mes == ''){
-            pintarCampoError('mes')
-            validarCampos = false;
-        } else {
-            despintarCampoError('mes')
-        }
-
-        if(anio == ''){
-            pintarCampoError('anio');
-            validarCampos = false;
-        } else {
-            despintarCampoError('anio');
-        }
+    //Validación de fecha nacimiento
+    // Validación del día
+    if (!validarDia(dia, mes, anio) || dia === '') {//Valido los campos del dia
+        pintarCampoError('dia');
+        validarCampos = false;
+    } else {
+        despintarCampoError('dia');
     }
+
+    // Validación del mes
+    if (mes < 1 || mes > 12 || mes === '') {//Valido los campos del mes
+        pintarCampoError('mes');
+        validarCampos = false;
+    } else {
+        despintarCampoError('mes');
+    }
+
+    // Validación del año
+    if (anio === '' || anio < 1920){//No creo que haya una persona de más de 100 años, por eso anio < 1920
+        pintarCampoError('anio');
+        validarCampos = false;
+    } else {
+        despintarCampoError('anio');
+    }
+
     // Mostrar mensaje de éxito si la validación es correcta
     if (validarCampos) {
         alert('Todos los datos son correctos.');
