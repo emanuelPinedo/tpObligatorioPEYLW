@@ -10,7 +10,7 @@ function validar(){
     var validarCampos = true;
 
     //Validación de nombre
-    if(nombre === ''){
+    if(nombre === '' || !validarNombre(nombre)){
         pintarCampoError('nombre');
         validarCampos = false;
     } else {
@@ -18,7 +18,7 @@ function validar(){
     }
 
     //Validación de apellido
-    if (apellido === '') {
+    if (apellido === '' || !validarApellido(apellido)) {
         pintarCampoError('apellido');
         validarCampos = false;
     } else {
@@ -26,16 +26,11 @@ function validar(){
     }
 
     //Validación de email
-    if (email === '') {
+    if (email === '' || !validarEmail(email)) {
         pintarCampoError('email');
         validarCampos = false;
     } else {
-        if (!validarEmail(email)) {
-            pintarCampoError('email');
-            validarCampos = false;
-        } else {
-            despintarCampoError('email');
-        }
+        despintarCampoError('email');
     }
 
     //Validación de obras sociales
@@ -64,7 +59,7 @@ function validar(){
     }
 
     // Validación del año
-    if (anio === '' || anio < 1920){//No creo que haya una persona de más de 100 años, por eso anio < 1920
+    if (anio === '' || anio < 1924){//No creo que haya una persona de más de 100 años, por eso anio < 1924
         pintarCampoError('anio');
         validarCampos = false;
     } else {
@@ -148,6 +143,16 @@ function validarEmail(email){
     var contenidoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return contenidoEmail.test(email);
     //El método test va a tomar una cadena y va a devolver true si esa cadena cumple con el patrón definido.
+}
+
+function validarNombre(nombre){
+    var soloLetras = /^[A-Za-zÁáÉéÍíÓóÚúñÑ\s]+$/;
+    return soloLetras.test(nombre);
+}
+
+function validarApellido(apellido){
+    var soloLetras = /^[A-Za-zÁáÉéÍíÓóÚúñÑ\s]+$/;
+    return soloLetras.test(apellido);
 }
 
 function pintarCampoError(idDelCampo){
